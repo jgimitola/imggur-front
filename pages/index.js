@@ -7,11 +7,18 @@ import AddIcon from "@mui/icons-material/Add";
 import DatePicker from "../modules/components/DatePicker";
 import ImageTile from "@/modules/components/ImageContainer";
 import UploadImage from "@/modules/components/UploadImage";
+import useImages from "@/modules/hooks/useImages";
 
 const Title = styled(Typography)`
   text-align: center;
   font-size: 32px;
   font-weight: 700;
+`;
+
+const Loading = styled(Typography)`
+  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
 `;
 
 const DatesWrapper = styled(Box)`
@@ -52,6 +59,9 @@ export default function Home() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const imagesInformation = useImages(dates);
+  const imagesObjects = imagesInformation.data?.data?.result || [];
+
   return (
     <>
       <Head>
@@ -81,20 +91,17 @@ export default function Home() {
           />
         </DatesWrapper>
 
+        {imagesInformation.isLoading && <Loading>Loading...</Loading>}
+
         <ImagesWrapper>
-          <ImageTile
-            src="https://pixlr.com/images/index/remove-bg.webp"
-            username="Jose Lopez"
-            date="12/12/2022"
-          />
-          <ImageTile
-            src="https://pixlr.com/images/index/filter-effect.webp"
-            username="Jose Lopez"
-            date="12/12/2022"
-          />
-          <ImageTile src="https://pixlr.com/images/index/remove-bg.webp" />
-          <ImageTile src="https://pixlr.com/images/index/remove-bg.webp" />
-          <ImageTile src="https://pixlr.com/images/index/remove-bg.webp" />
+          {imagesObjects.map((imgObject) => (
+            <ImageTile
+              key={imgObject._id}
+              src={imgObject.img_url}
+              username={imgObject.username}
+              date={imgObject.created_date}
+            />
+          ))}
         </ImagesWrapper>
       </main>
 

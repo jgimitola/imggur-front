@@ -2,6 +2,7 @@ import React from "react";
 
 import { Box, styled, Typography } from "@mui/material";
 import Image from "next/image";
+import { format } from "date-fns";
 
 const Container = styled(Box)`
   position: relative;
@@ -48,12 +49,14 @@ const DetailText = styled(Typography)`
 const ImageTile = (props) => {
   const { src, username, date, ...rest } = props;
 
+  const formattedDate = format(new Date(date), "dd/MM/yyyy");
+
   return (
     <Container>
       <Image src={src} alt="" fill />
       <Details>
         <DetailText>{username}</DetailText>
-        <DetailText>{date}</DetailText>
+        <DetailText>{formattedDate}</DetailText>
       </Details>
     </Container>
   );

@@ -11,6 +11,7 @@ const DatePicker = (props) => {
       label={label}
       value={value}
       onChange={onChange}
+      inputFormat="dd/MM/yyyy"
       renderInput={(params) => <TextField {...params} />}
     />
   );
