@@ -110,7 +110,7 @@ export default function Home() {
       </CreateFab>
 
       <CreationModal open={open} onClose={handleClose}>
-        <UploadImage />
+        <UploadImage handleClose={handleClose} />
       </CreationModal>
     </>
   );
