@@ -61,6 +61,12 @@ const CreateFab = styled(Fab)`
   bottom: 24px;
 `;
 
+const StatsFab = styled(Fab)`
+  position: absolute;
+  right: 24px;
+  bottom: 90px;
+`;
+
 const CreationModal = styled(Modal)`
   display: flex;
   justify-content: center;
@@ -75,7 +81,7 @@ export default function Home() {
   const handleClose = () => setOpen(false);
 
   const imagesInformation = useImages(dates);
-  const imagesObjects = imagesInformation.data?.data?.result || [];
+  const imagesObjects = imagesInformation.data.data.result;
 
   return (
     <>
@@ -120,6 +126,9 @@ export default function Home() {
         </ImagesWrapper>
       </MainContainer>
 
+      <StatsFab color="secondary" href="/stats" LinkComponent={Link}>
+        <TimelineIcon />
+      </StatsFab>
 
       <CreateFab color="primary" onClick={handleOpen}>
         <AddIcon />
