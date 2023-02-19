@@ -4,10 +4,12 @@ import Head from "next/head";
 
 import { Box, Fab, Modal, styled, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import TimelineIcon from "@mui/icons-material/Timeline";
 import DatePicker from "../modules/components/DatePicker";
 import ImageTile from "@/modules/components/ImageContainer";
 import UploadImage from "@/modules/components/UploadImage";
 import useImages from "@/modules/hooks/useImages";
+import Link from "next/link";
 
 const Title = styled(Typography)`
   text-align: center;
@@ -21,22 +23,35 @@ const Loading = styled(Typography)`
   font-weight: 500;
 `;
 
+const MainContainer = styled("main")`
+  box-sizing: content-box;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  height: 100vh;
+  height: 100svh;
+`;
+
 const DatesWrapper = styled(Box)`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 8px;
-
-  margin-block: 8px;
 `;
 
 const ImagesWrapper = styled(Box)`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-content: start;
   gap: 8px;
 
-  margin-block: 8px;
+  height: 100%;
+
+  overflow: auto;
+
   padding: 16px 8px;
 `;
 
@@ -74,7 +89,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <MainContainer>
         <Title component="h1">Imggur</Title>
 
         <DatesWrapper>
@@ -103,7 +118,8 @@ export default function Home() {
             />
           ))}
         </ImagesWrapper>
-      </main>
+      </MainContainer>
+
 
       <CreateFab color="primary" onClick={handleOpen}>
         <AddIcon />
