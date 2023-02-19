@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["pixlr.com"],
+    domains: ["jgimitola-imggur-bucket.s3.us-east-2.amazonaws.com"],
   },
 };
 

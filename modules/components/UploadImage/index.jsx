@@ -52,7 +52,7 @@ const UploadImage = forwardRef((props, ref) => {
     });
   };
 
-  const disabled = !username || !file;
+  const disabled = imageMutation.isLoading || !username || !file;
 
   return (
     <Container>
@@ -68,7 +68,7 @@ const UploadImage = forwardRef((props, ref) => {
       <UploadFile onChange={(evt) => setFile(evt.target.files[0])} />
 
       <Button variant="contained" disabled={disabled} onClick={handleUpload}>
-        Upload
+        {imageMutation.isLoading ? "Loading" : "Upload"}
       </Button>
     </Container>
   );
