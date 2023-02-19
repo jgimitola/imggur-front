@@ -2,10 +2,11 @@ import React from "react";
 
 import Head from "next/head";
 
+import { utcToZonedTime, format } from "date-fns-tz";
+
 import { Box, Button, styled, Typography } from "@mui/material";
 import Link from "next/link";
 import useHoursSummary from "@/modules/hooks/useHoursSummary";
-import { format } from "date-fns";
 
 const Title = styled(Typography)`
   text-align: center;
@@ -34,7 +35,10 @@ const HoursSummary = styled(Box)`
 `;
 
 const referenceDate = (hour) =>
-  new Date(`2023-01-15 ${String(hour).padStart(2, "0")}:00:00`);
+  utcToZonedTime(
+    new Date(`2023-01-15 ${String(hour).padStart(2, "0")}:00:00Z`),
+    "America/Bogota"
+  );
 
 const Stats = () => {
   const information = useHoursSummary();

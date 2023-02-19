@@ -2,7 +2,7 @@ import React from "react";
 
 import { Box, styled, Typography } from "@mui/material";
 import Image from "next/image";
-import { format } from "date-fns";
+import { format, utcToZonedTime } from "date-fns-tz";
 
 const Container = styled(Box)`
   position: relative;
@@ -49,7 +49,10 @@ const DetailText = styled(Typography)`
 const ImageTile = (props) => {
   const { src, username, date, ...rest } = props;
 
-  const formattedDate = format(new Date(date), "dd/MM/yyyy");
+  const zonedDate = utcToZonedTime(date, "America/Bogota");
+
+  const formattedDate = format(zonedDate, "dd/MM/yyyy");
+  const formattedTime = format(zonedDate, "hh:mm aaa");
 
   return (
     <Container>
@@ -57,6 +60,7 @@ const ImageTile = (props) => {
       <Details>
         <DetailText>{username}</DetailText>
         <DetailText>{formattedDate}</DetailText>
+        <DetailText>{formattedTime}</DetailText>
       </Details>
     </Container>
   );
