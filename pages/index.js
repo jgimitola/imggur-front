@@ -1,6 +1,9 @@
 import { useState } from "react";
 
 import Head from "next/head";
+import Link from "next/link";
+
+import { endOfDay, startOfDay } from "date-fns";
 
 import { Box, Fab, Modal, styled, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
@@ -9,7 +12,6 @@ import DatePicker from "../modules/components/DatePicker";
 import ImageTile from "@/modules/components/ImageContainer";
 import UploadImage from "@/modules/components/UploadImage";
 import useImages from "@/modules/hooks/useImages";
-import Link from "next/link";
 
 const Title = styled(Typography)`
   text-align: center;
@@ -102,13 +104,23 @@ export default function Home() {
           <DatePicker
             label="Start Date"
             value={dates.startDate}
-            onChange={(newDate) => setDates({ ...dates, startDate: newDate })}
+            onChange={(newDate) =>
+              setDates({
+                ...dates,
+                startDate: newDate ? startOfDay(newDate) : null,
+              })
+            }
           />
 
           <DatePicker
             label="End Date"
             value={dates.endDate}
-            onChange={(newDate) => setDates({ ...dates, endDate: newDate })}
+            onChange={(newDate) =>
+              setDates({
+                ...dates,
+                endDate: newDate ? endOfDay(newDate) : null,
+              })
+            }
           />
         </DatesWrapper>
 
